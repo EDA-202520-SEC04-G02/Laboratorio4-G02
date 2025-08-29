@@ -1,22 +1,22 @@
-from DataStructures.List import single_linked_list as sl
+from DataStructures.List import single_linked_list as lt
 
 def new_queue():
-    return sl.new_list()
+    return lt.new_list()
 
 def is_empty(queue):
-    return sl.is_empty(queue)
+    return lt.is_empty(queue)
 
 def size(queue):
-    return sl.size(queue)
+    return lt.size(queue)
 
 def enqueue(queue, element):
-    queue = sl.add_last(queue, element)
+    queue = lt.add_last(queue, element)
     return queue
 
 def dequeue(queue):
-    queue = sl.remove_first(queue)
+    queue = lt.remove_first(queue)
     return queue
 
 def peek(queue):
-    return sl.get_element(queue, 0)
+    return lt.get_element(queue, 0)
 
