@@ -139,7 +139,7 @@ def get_books_stack_by_user(catalog, user_id):
     books_to_read = catalog['books_to_read']
     size = lt.size(books_to_read)
 
-    for pos in range(1, size + 1):  # DISClib usa índices desde 1
+    for pos in range(size):
         entry = lt.get_element(books_to_read, pos)
         if int(entry['user_id']) == int(user_id):
             book_id = entry['book_id']
@@ -154,22 +154,25 @@ def get_user_position_on_queue(catalog, user_id, book_id):
     Retorna la posición de un usuario en la cola para leer un libro.
     """
     queue = q.new_queue()
+    books_to_read = catalog['books_to_read']
+    size = lt.size(books_to_read)
 
-    # TODO NO ESTOY SEGURO Completar la función que retorna la posición de un usuario en la cola para leer un libro. Se debe usar el TAD Cola para resolver el requerimiento.
-    
     # Encolamos solo los usuarios que esperan por ese libro
-    for entry in catalog['books_to_read']:
-        if entry['book_id'] == book_id:
+    for pos in range(size):  # 0 .. size-1
+        entry = lt.get_element(books_to_read, pos)
+        if int(entry['book_id']) == int(book_id):
             q.enqueue(queue, entry)
-    position = 1
-    
+
     # Recorremos la cola para encontrar la posición del usuario
+    position = 1
     while not q.is_empty(queue):
         current = q.dequeue(queue)
-        if current['user_id'] == user_id:
+        if int(current['user_id']) == int(user_id):
             return position
         position += 1
-    return -1 # Esto significa que el usuario no esta en la cola
+
+    return -1  # Usuario no está en la cola
+
 
 # Funciones para agregar informacion al catalogo
 
