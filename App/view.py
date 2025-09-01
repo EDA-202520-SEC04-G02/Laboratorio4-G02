@@ -27,6 +27,9 @@
 import sys
 import App.logic as logic
 
+from DataStructures.Queue import queue as q
+from DataStructures.Stack import stack as st
+
 """
 La vista se encarga de la interacción con el usuario
 Presenta el menú de opciones y por cada selección
@@ -64,8 +67,11 @@ def load_data(control):
 
 
 def print_books_to_read(results):
-    # TODO Imprimir los libros por leer
-    pass
+    # TODO DONE Imprimir los libros por leer
+    print("=== Libros por leer ===")
+    while not st.is_empty(results):
+        book = st.pop(results)
+        print(f"- {book['title']}, {book['authors']}")
 
 
 def print_tests_results(queue_results, stack_results):
@@ -83,8 +89,13 @@ def print_tests_results(queue_results, stack_results):
 
     print("\nTiempos de ejecución para Pila: \n")
 
-    # TODO Imprimir los resultados de las pruebas de rendimiento de la pila
-
+    # TODO DONE Imprimir los resultados de las pruebas de rendimiento de la pila
+    print("Tiempo de ejecución para push:",
+          f"{stack_results['push_time']:.3f}", "[ms]")
+    print("Tiempo de ejecución para peek:",
+          f"{stack_results['peek_time']:.3f}", "[ms]")
+    print("Tiempo de ejecución para pop:",
+          f"{stack_results['pop_time']:.3f}", "[ms]")
 
 # Se crea el controlador asociado a la vista
 control = new_logic()
@@ -121,8 +132,14 @@ def main():
 
             result = logic.get_user_position_on_queue(
                 control, int(user_id), int(book_id))
-            # TODO Imprimir la posición del usuario en la cola
-
+            # TODO DONE Imprimir la posición del usuario en la cola
+            print("\n=== Posición en la cola ===")
+            if result == -1:
+                print(f"El usuario {user_id} no está en la cola para leer el libro {book_id}.")
+            else:
+                print(f"El usuario {user_id} está en la posición {result} en la cola para leer el libro {book_id}.")
+            
+            
         elif int(inputs[0]) == 4:
             size = input("Indique tamaño de la muestra: ")
             size = int(size)
