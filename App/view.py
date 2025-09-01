@@ -55,6 +55,7 @@ def print_menu():
     print("2- Consultar la pila de libros por leer de un usuario")
     print("3- Consultar la posición del usuario en la cola para leer un libro")
     print("4- Ejecutar pruebas de rendimiento")
+    print("5- Ejecutar pruebas de rendimiento mejoradas")
     print("0- Salir")
 
 
@@ -149,6 +150,37 @@ def main():
             queue_result = logic.measure_queue_performance(control)
             stack_result = logic.measure_stack_performance(control)
             print_tests_results(queue_result, stack_result)
+        
+        elif int(inputs[0]) == 5:
+            # Tamaños de muestra que quieres probar
+            sizes = [50, 500, 1000, 2000, 3000, 5000, 8000, 10000]
+
+            print("\nEjecutando pruebas de rendimiento mejoradas...\n")
+
+            # Encabezado
+            print(f"{'Tamaño de la muestra':<20}\t"
+                f"{'enqueue':<20}"
+                f"{'dequeue':<20}"
+                f"{'peek':<20}"
+                f"{'push':<20}"
+                f"{'pop':<20}"
+                f"{'top':<20}")
+
+            # Iterar sobre cada tamaño de muestra
+            for size in sizes:
+                logic.set_book_sublist(control, size)
+
+                queue_result = logic.measure_queue_performance(control)
+                stack_result = logic.measure_stack_performance(control)
+
+                print(f"{float(size):<20.2f}\t"
+                    f"{queue_result['enqueue_time']:<20.4f}"
+                    f"{queue_result['dequeue_time']:<20.4f}"
+                    f"{queue_result['peek_time']:<20.4f}"
+                    f"{stack_result['push_time']:<20.4f}"
+                    f"{stack_result['pop_time']:<20.4f}"
+                    f"{stack_result['top_time']:<20.4f}")
+
 
         elif int(inputs[0]) == 0:
             working = False
