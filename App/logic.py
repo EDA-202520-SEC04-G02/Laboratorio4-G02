@@ -375,12 +375,13 @@ def measure_queue_performance(catalog):
 
 def measure_stack_performance(catalog):
     """
-    Mide el desempeño de las operaciones de la pila
+    Mide el desempeño de las operaciones de la pila.
     """
 
     stack = st.new_stack()
 
-    # Medir push
+    # TODO DONE Implementar la medición de tiempo para la operación push
+    # Medimos el tiempo total de hacer push para todos los libros de la sublista
     start_time = get_time()
     for pos in range(lt.size(catalog["book_sublist"])):
         book = lt.get_element(catalog["book_sublist"], pos)
@@ -388,25 +389,24 @@ def measure_stack_performance(catalog):
     end_time = get_time()
     push_time = delta_time(start_time, end_time)
 
-    # TODO DONE Implementar la medición de tiempo para la operación push
-
-    # Medir top
-    start_time = get_time()
-    top = st.top(stack)
     # TODO DONE Implementar la medición de tiempo para la operación top
+    # Medimos el tiempo total de una sola llamada a top
+    start_time = get_time()
+    st.top(stack)
     end_time = get_time()
     top_time = delta_time(start_time, end_time)
 
-    # Medir dequeue
+    # TODO DONE Implementar la medición de tiempo para la operación pop
+    # Medimos el tiempo total de hacer pop hasta vaciar la pila
     start_time = get_time()
     while not st.is_empty(stack):
         st.pop(stack)
     end_time = get_time()
     pop_time = delta_time(start_time, end_time)
-    # TODO DONE Implementar la medición de tiempo para la operación pop
 
     return {
         "push_time": push_time,
         "top_time": top_time,
         "pop_time": pop_time
     }
+
