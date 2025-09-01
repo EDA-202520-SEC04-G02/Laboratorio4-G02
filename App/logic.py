@@ -135,10 +135,15 @@ def get_books_stack_by_user(catalog, user_id):
     books_stack = st.new_stack()
 
     # TODO DONE Completar la función que retorna los libros por leer de un usuario. Se debe usar el TAD Pila para resolver el requerimiento
-    for entry in catalog['books_to_read']:
-        if entry['user_id'] == user_id:
+    books_stack = st.new_stack()
+    books_to_read = catalog['books_to_read']
+    size = lt.size(books_to_read)
+
+    for pos in range(1, size + 1):  # DISClib usa índices desde 1
+        entry = lt.get_element(books_to_read, pos)
+        if int(entry['user_id']) == int(user_id):
             book_id = entry['book_id']
-            book = catalog['books'][book_id]   # obtengo el libro real usando su id
+            book = lt.get_element(catalog['books'], int(book_id))
             st.push(books_stack, book)
 
     return books_stack
