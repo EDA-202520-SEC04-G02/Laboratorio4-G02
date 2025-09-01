@@ -93,7 +93,7 @@ def print_tests_results(queue_results, stack_results):
     print("Tiempo de ejecución para push:",
           f"{stack_results['push_time']:.3f}", "[ms]")
     print("Tiempo de ejecución para peek:",
-          f"{stack_results['peek_time']:.3f}", "[ms]")
+          f"{stack_results['top_time']:.3f}", "[ms]")
     print("Tiempo de ejecución para pop:",
           f"{stack_results['pop_time']:.3f}", "[ms]")
 
